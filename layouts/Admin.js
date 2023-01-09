@@ -11,7 +11,6 @@ import Sidebar from "components/Sidebar/Sidebar.js";
 import routes from "routes.js";
 
 function Admin(props) {
-  // used for checking current route
   const router = useRouter();
   let mainContentRef = React.createRef();
   React.useEffect(() => {
