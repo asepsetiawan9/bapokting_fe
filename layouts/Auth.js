@@ -26,9 +26,9 @@ function Auth(props) {
             <div className="header-body text-center mb-7">
               <Row className="justify-content-center">
                 <Col lg="5" md="6">
-                  <h1 className="text-white">Selamat Datang!</h1>
+                  <h1 className="text-white">INFORMASI HARGA BAHAN KEBUTUHAN POKOK MASYARAKAT DAN BARANG PENTING LAINNYA</h1>
                   <p className="text-lead text-light">
-                    Sistem Pemantauan Bahan Pokok dan Bahan Penting
+                    KABUPATEN GARUT
                   </p>
                 </Col>
               </Row>

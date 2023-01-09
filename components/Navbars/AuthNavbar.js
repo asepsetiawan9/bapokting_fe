@@ -35,7 +35,7 @@ function AdminNavbar() {
             <div className="navbar-collapse-header d-md-none">
               <Row>
                 <Col className="collapse-brand" xs="6">
-                  <Link href="/admin/dashboard">
+                  <Link href="/auth/home">
                     <img
                       alt="..."
                       src={require("assets/img/brand/nextjs_argon_black.png")}

@@ -18,21 +18,20 @@ import { TextField, FormControl, InputLabel, Select,MenuItem} from '@material-ui
 function Home() {
     const [data, setData] = useState([]);
     const [dataDate, setDataDate] = useState([]);
-    // const [searchTerm, setSearchTerm] = useState('')
     const [date, setDate] = useState('')
-    console.log(data);
-
+    const [dateShow, setDateShow] = useState('')
+    //  console.log(dateShow);
+    
     useEffect(() => {
         getData();
         getDataDate();
     }, [date]);
 
-    console.log(data);
-
     const getData = async () => {
         try {
             const result = await http.get(`/komoditi/list/${date ? '?tanggal=' + date : ''}`);
             setData(result.data.result);
+            setDateShow(result.data.result[0].tanggal)
         } catch (error) {
             console.log(error);
         }
@@ -50,6 +49,7 @@ function Home() {
     const handleChangeSelect = (event) => {
     const value = event.target.value;
         setDate(value);
+        setDateShow(value);
     };
   return (
     <>
@@ -60,7 +60,8 @@ function Home() {
                 <CardHeader className="border-0">
                 <Row className="align-items-center">
                     <div className="col">
-                    <h3 className="mb-0">Daftar Harga Bapokting</h3>
+                        <h3 className="mb-0 pb-2">Daftar Harga Bapokting</h3>
+                        <p> Harga per-Tanggal <span className="font-weight-bold">{dateShow}</span></p>
                     </div>
                     <div >
                     <FormControl >
@@ -72,7 +73,7 @@ function Home() {
                         onChange={handleChangeSelect}
                         >
                         {dataDate.map((item) => (
-                            <MenuItem className="px-5" value={item.tanggal}>{item.tanggal}</MenuItem>
+                            <MenuItem className="px-5" value={item.tanggal ? item.tanggal : dateShow}>{item.tanggal ? item.tanggal : dateShow }</MenuItem>
                         ))}
 
                         </Select>
