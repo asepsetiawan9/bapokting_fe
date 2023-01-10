@@ -2,6 +2,7 @@ import axios from "axios";
 import Cookie from "js-cookie"
 
 const axiosApiIntances = axios.create({
+    // baseURL: 'http://localhost:4000'
     baseURL: 'https://bapokting-backend.vercel.app/'
 })
 

@@ -1,3 +1,7 @@
+
+import React, {useEffect, useState} from "react";
+import http from '../helper/axios'
+
 if (typeof window === "undefined") {
   global.window = {};
 }
@@ -6,28 +10,7 @@ if (typeof document === "undefined") {
     querySelector: () => {},
   };
 }
-/*!
-
-=========================================================
-* NextJS Argon Dashboard - v1.1.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/nextjs-argon-dashboard
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/nextjs-argon-dashboard/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 const Chart = require("chart.js");
-//
-// Chart extension for making the bars rounded
-// Code from: https://codepen.io/jedtrow/full/ygRYgo
-//
 
 Chart.elements.Rectangle.prototype.draw = function () {
   var ctx = this._chart.ctx;
@@ -187,10 +170,21 @@ var colors = {
   transparent: "transparent",
 };
 
-// Methods
-
-// Chart.js global options
 function chartOptions() {
+  // const [dataStatistik, setDataStatistik] = useState([]);
+  // useEffect(() => {
+  //   getData();
+  // }, []);
+
+  // const getData = async () => {
+  //   try {
+  //       const result = await http.get(`/komoditi/komoditi-statistik`);
+  //       setDataStatistik(result.data.result);
+  //   } catch (error) {
+  //       console.log(error);
+  //   }
+  // };
+// console.log(dataStatistik);
   // Options
   var options = {
     defaults: {
@@ -302,8 +296,6 @@ function chartOptions() {
 
   return options;
 }
-
-// Parse global options
 function parseOptions(parent, options) {
   for (var item in options) {
     if (typeof options[item] !== "object") {
@@ -313,8 +305,6 @@ function parseOptions(parent, options) {
     }
   }
 }
-
-// Example 1 of Chart inside src/views/Index.js (Sales value - Card)
 let chartExample1 = {
   options: {
     scales: {
@@ -351,13 +341,15 @@ let chartExample1 = {
       },
     },
   },
-  data1: (canvas) => {
+  data1: (canvas, dataStatistik) => {
+    // const { dataStatistik } = dataStatistik;
+    // console.log(dataStatistik);
     return {
       labels: ["May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
       datasets: [
         {
           label: "Performance",
-          data: [0, 20, 10, 30, 15, 40, 20, 60, 60],
+          data: [0, 10, 30, 15, 40, 20, 60, 100],
         },
       ],
     };
@@ -375,53 +367,9 @@ let chartExample1 = {
   },
 };
 
-// Example 2 of Chart inside src/views/Index.js (Total orders - Card)
-let chartExample2 = {
-  options: {
-    scales: {
-      yAxes: [
-        {
-          ticks: {
-            callback: function (value) {
-              if (!(value % 10)) {
-                //return '$' + value + 'k'
-                return value;
-              }
-            },
-          },
-        },
-      ],
-    },
-    tooltips: {
-      callbacks: {
-        label: function (item, data) {
-          var label = data.datasets[item.datasetIndex].label || "";
-          var yLabel = item.yLabel;
-          var content = "";
-          if (data.datasets.length > 1) {
-            content += label;
-          }
-          content += yLabel;
-          return content;
-        },
-      },
-    },
-  },
-  data: {
-    labels: ["Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-    datasets: [
-      {
-        label: "Sales",
-        data: [25, 20, 30, 22, 17, 29],
-        maxBarThickness: 10,
-      },
-    ],
-  },
-};
 
 module.exports = {
   chartOptions, // used inside src/views/Index.js
   parseOptions, // used inside src/views/Index.js
   chartExample1, // used inside src/views/Index.js
-  chartExample2, // used inside src/views/Index.js
 };

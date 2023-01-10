@@ -83,6 +83,7 @@ function Pasar() {
         console.log(error);
     }
 }
+{/* <Select options={data} name="id_komoditi" value={data.id} onChange={(e) => setForm({ ...form, id_komoditi: e.id })} /> */}
 const formatter = new Intl.NumberFormat('id-ID', {
   style: 'currency',
   currency: 'IDR',
